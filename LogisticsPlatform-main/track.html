@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parcel Tracking</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .tracking-form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 18px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #0c8de3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0c8de3;
+        }
+
+        /* Status box styling */
+        .status-box {
+            margin-top: 20px;
+            display: none;
+            /* Initially hidden */
+        }
+
+        /* Card styling */
+        .card {
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .card-header {
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        /* Success card styling */
+        .success {
+            border: 2px solid #0c8de3;
+            background-color: #e6ffee;
+        }
+
+        /* Error card styling */
+        .error {
+            border: 2px solid red;
+            background-color: #ffe6e6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Track Your Parcel</h1>
+        <div class="tracking-form">
+            <label for="tracking-number">Enter Your Tracking Number:</label>
+            <input type="text" id="tracking-number" placeholder="Tracking Number">
+            <button onclick="trackParcel()">Track</button>
+        </div>
+
+        <div id="tracking-status" class="status-box">
+            <!-- Parcel status will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function trackParcel() {
+            // Sample tracking data for demo purposes
+            const trackingData = {
+                "TR123456": "Your parcel is currently in New York, NY.",
+                "TR654321": "Your parcel has been dispatched from the warehouse.",
+                "TR987654": "Your parcel has been delivered to its destination."
+            };
+
+            const trackingNumber = document.getElementById("tracking-number").value;
+            const statusBox = document.getElementById("tracking-status");
+
+            // Check if the tracking number exists in our data
+            if (trackingData[trackingNumber]) {
+                statusBox.innerHTML = `
+                    <div class="card success">
+                        <div class="card-header">
+                            Tracking Status
+                        </div>
+                        <div class="card-body">
+                            <p>${trackingData[trackingNumber]}</p>
+                        </div>
+                    </div>
+                `;
+                statusBox.style.display = "block";
+            } else {
+                statusBox.innerHTML = `
+                    <div class="card error">
+                        <div class="card-header">
+                            Error
+                        </div>
+                        <div class="card-body">
+                            <p>Invalid tracking number. Please try again.</p>
+                        </div>
+                    </div>
+                `;
+                statusBox.style.display = "block";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
